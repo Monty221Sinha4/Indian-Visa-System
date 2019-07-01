@@ -1,0 +1,18 @@
+create table Countries
+(
+CountryID int primary key identity (1,1)  not null,
+Country varchar(40) not null,
+);
+
+create table VisaTypes 
+(
+VisaID int primary key identity(1,1) not null,
+VisaTypes varchar(50) not null,
+);
+
+
+create table  VisaStatus
+(
+StatusID int primary key identity(1,1) not null,
+Status varchar(50) not null,
+);
