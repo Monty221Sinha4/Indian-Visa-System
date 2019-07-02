@@ -1,0 +1,9 @@
+create table Customers_2
+(
+CustomerID int primary key identity(1,1) not null,
+Firstname varchar(50) not null,
+Surname varchar(50) not null,
+DateOfBirth datetime not null,
+AddressID int not null,
+CountryID int not null,
+);
