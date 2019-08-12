@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VisaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Appilcants">
+    <Key>
+      <PropertyRef Name="AppID" />
+    </Key>
+    <Property Name="AppID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateOfbirth" Type="datetime" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="VisaID" Type="int" Nullable="false" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VisaStatus">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VisaTypes">
+    <Key>
+      <PropertyRef Name="VisaID" />
+    </Key>
+    <Property Name="VisaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisaTypes" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Appilcants_Cities">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_VisaStatus">
+    <End Role="VisaStatus" Type="Self.VisaStatus" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisaStatus">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_VisaTypes">
+    <End Role="VisaTypes" Type="Self.VisaTypes" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisaTypes">
+        <PropertyRef Name="VisaID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="VisaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VisaModelStoreContainer">
+    <EntitySet Name="Appilcants" EntityType="Self.Appilcants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VisaStatus" EntityType="Self.VisaStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VisaTypes" EntityType="Self.VisaTypes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Appilcants_Cities" Association="Self.FK_Appilcants_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_Countries" Association="Self.FK_Appilcants_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_VisaStatus" Association="Self.FK_Appilcants_VisaStatus">
+      <End Role="VisaStatus" EntitySet="VisaStatus" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_VisaTypes" Association="Self.FK_Appilcants_VisaTypes">
+      <End Role="VisaTypes" EntitySet="VisaTypes" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

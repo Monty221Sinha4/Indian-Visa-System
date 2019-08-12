@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VisaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Appilcant">
+    <Key>
+      <PropertyRef Name="AppID" />
+    </Key>
+    <Property Name="AppID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfbirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="VisaID" Type="Int32" Nullable="false" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Appilcants_Cities" FromRole="Appilcants" ToRole="Cities" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Appilcants_Countries" FromRole="Appilcants" ToRole="Countries" />
+    <NavigationProperty Name="VisaStatu" Relationship="Self.FK_Appilcants_VisaStatus" FromRole="Appilcants" ToRole="VisaStatus" />
+    <NavigationProperty Name="VisaType" Relationship="Self.FK_Appilcants_VisaTypes" FromRole="Appilcants" ToRole="VisaTypes" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cities" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Appilcants" Relationship="Self.FK_Appilcants_Cities" FromRole="Cities" ToRole="Appilcants" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Countires" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Appilcants" Relationship="Self.FK_Appilcants_Countries" FromRole="Countries" ToRole="Appilcants" />
+  </EntityType>
+  <EntityType Name="VisaStatu">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Appilcants" Relationship="Self.FK_Appilcants_VisaStatus" FromRole="VisaStatus" ToRole="Appilcants" />
+  </EntityType>
+  <EntityType Name="VisaType">
+    <Key>
+      <PropertyRef Name="VisaID" />
+    </Key>
+    <Property Name="VisaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VisaTypes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Appilcants" Relationship="Self.FK_Appilcants_VisaTypes" FromRole="VisaTypes" ToRole="Appilcants" />
+  </EntityType>
+  <Association Name="FK_Appilcants_Cities">
+    <End Role="Cities" Type="Self.City" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_Countries">
+    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_VisaStatus">
+    <End Role="VisaStatus" Type="Self.VisaStatu" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisaStatus">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appilcants_VisaTypes">
+    <End Role="VisaTypes" Type="Self.VisaType" Multiplicity="1" />
+    <End Role="Appilcants" Type="Self.Appilcant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisaTypes">
+        <PropertyRef Name="VisaID" />
+      </Principal>
+      <Dependent Role="Appilcants">
+        <PropertyRef Name="VisaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Indian_Visa_SystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appilcants" EntityType="Self.Appilcant" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="VisaStatus" EntityType="Self.VisaStatu" />
+    <EntitySet Name="VisaTypes" EntityType="Self.VisaType" />
+    <AssociationSet Name="FK_Appilcants_Cities" Association="Self.FK_Appilcants_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_Countries" Association="Self.FK_Appilcants_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_VisaStatus" Association="Self.FK_Appilcants_VisaStatus">
+      <End Role="VisaStatus" EntitySet="VisaStatus" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appilcants_VisaTypes" Association="Self.FK_Appilcants_VisaTypes">
+      <End Role="VisaTypes" EntitySet="VisaTypes" />
+      <End Role="Appilcants" EntitySet="Appilcants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
