@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Indian_Visa_System.Appilcant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfbirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City.Cities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.Countires)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisaStatu.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisaType.VisaTypes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfbirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City.Cities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.Countires)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisaStatu.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisaType.VisaTypes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AppID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AppID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AppID })
+        </td>
+    </tr>
+}
+
+</table>
